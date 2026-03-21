@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gustavo Paz — AI Automation Systems Engineer</title>
+<link rel="icon" type="image/png" href="cody.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -255,7 +256,7 @@
 <div class="glow-top"></div>
 
 <nav>
-  <div class="nav-logo"><span>INGAP</span> / Gustavo Paz</div>
+  <div class="nav-logo"><span>INGAP</span> / Gustavo Paz <img src="cody.png" alt="Cody" style="width:36px;vertical-align:middle;margin-left:6px;opacity:0.85;"></div>
   <ul class="nav-links">
     <li><a href="#proyectos">Proyectos</a></li>
     <li><a href="#arquitectura">Arquitectura</a></li>
@@ -423,6 +424,23 @@
       </div>
     </div>
 
+    <div class="project-card">
+      <div class="project-num">07</div>
+      <div class="project-client">Proyecto propio · Trading</div>
+      <h3 class="project-name">Scalpy — Asistente de Psicología del Trading</h3>
+      <p class="project-problem"><strong>Problema:</strong> Los traders toman decisiones irracionales bajo presión emocional — miedo, avaricia, revenge trading — y no tienen acceso a un asistente que les ayude a procesar esas situaciones en tiempo real con base conceptual sólida.</p>
+      <ul class="decisions-list">
+        <li><strong>RAG sobre dos libros como herramientas separadas:</strong> "Trading en la Zona" (Douglas) y "Pensar Rápido, Pensar Despacio" (Kahneman) están indexados en dos tablas vectoriales distintas en Supabase, expuestas como herramientas independientes con descripciones semánticas específicas. El agente consulta una, la otra, o ambas según el contexto.</li>
+        <li><strong>Gemini para generación, OpenAI para embeddings:</strong> La generación usa Gemini 2.5 Flash Lite. Los embeddings usan OpenAI. Embeddings de OpenAI son más consistentes para RAG; Gemini es más económico para generación a escala.</li>
+        <li><strong>Soporte multimodal en Telegram:</strong> El bot acepta texto, audio y fotos. Los mensajes de voz se transcriben con Gemini antes de entrar al pipeline. Formatos no soportados devuelven un mensaje específico en lugar de un error genérico.</li>
+        <li><strong>Error handling tipado:</strong> Un nodo clasifica los errores por tipo (rate limit, timeout, Supabase caído, Postgres caído, contexto demasiado largo, API key inválida) y devuelve un mensaje diferente por caso. El usuario nunca ve un error técnico.</li>
+        <li><strong>Sistema de suscripciones con LemonSqueezy:</strong> Tabla suscripciones en PostgreSQL con telegram_id, estado, plan, fecha de vencimiento y lemon_subscription_id. El acceso al bot está condicionado al estado de la suscripción.</li>
+      </ul>
+      <div class="project-tags">
+        <span class="tag">Telegram Bot API</span><span class="tag">Supabase</span><span class="tag">Gemini 2.5 Flash Lite</span><span class="tag">OpenAI Embeddings</span><span class="tag">PostgreSQL</span><span class="tag">n8n</span>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -468,6 +486,12 @@
       <p class="pattern-desc">El identificador del recurso activo del período se almacena en una tabla dedicada. Todos los workflows que necesitan escribir en ese recurso lo consultan en tiempo de ejecución — sin hardcodear IDs ni duplicar referencias.</p>
       <div class="pattern-used">Aplicado en DarLogística</div>
     </div>
+    <div class="pattern-card">
+      <div class="pattern-num">07</div>
+      <div class="pattern-name">RAG con fuentes separadas por dominio semántico</div>
+      <p class="pattern-desc">Cuando el conocimiento proviene de múltiples fuentes con dominios distintos, cada fuente se indexa en su propio vector store y se expone al agente como herramienta independiente con descripción semántica específica. El agente decide en tiempo de ejecución qué fuente consultar según el contexto de la pregunta — sin mezclar índices ni perder precisión de recuperación.</p>
+      <div class="pattern-used">Aplicado en Scalpy</div>
+    </div>
   </div>
 </div>
 
@@ -489,6 +513,7 @@
       <div class="stack-cat-name">Inteligencia Artificial</div>
       <div class="stack-items">
         <div class="stack-item"><span class="stack-item-name">OpenAI API</span><span class="stack-item-note">modelos GPT</span></div>
+        <div class="stack-item"><span class="stack-item-name">Google Gemini API</span><span class="stack-item-note">modelos Gemini</span></div>
         <div class="stack-item"><span class="stack-item-name">Agentes multi-step</span></div>
         <div class="stack-item"><span class="stack-item-name">Vision · Análisis documental</span></div>
       </div>
@@ -515,6 +540,7 @@
       <div class="stack-cat-name">Canales de comunicación</div>
       <div class="stack-items">
         <div class="stack-item"><span class="stack-item-name">WhatsApp Business API</span></div>
+        <div class="stack-item"><span class="stack-item-name">Telegram Bot API</span></div>
         <div class="stack-item"><span class="stack-item-name">LinkedIn API</span><span class="stack-item-note">Unipile</span></div>
         <div class="stack-item"><span class="stack-item-name">Gmail API</span></div>
       </div>
@@ -525,6 +551,13 @@
         <div class="stack-item"><span class="stack-item-name">Python · Flask</span><span class="stack-item-note">microservicios</span></div>
         <div class="stack-item"><span class="stack-item-name">Playwright</span><span class="stack-item-note">scraping headless</span></div>
         <div class="stack-item"><span class="stack-item-name">Google Sheets · Drive API</span></div>
+      </div>
+    </div>
+    <div class="stack-cat">
+      <div class="stack-cat-name">RAG</div>
+      <div class="stack-items">
+        <div class="stack-item"><span class="stack-item-name">Supabase</span><span class="stack-item-note">vector store</span></div>
+        <div class="stack-item"><span class="stack-item-name">OpenAI Embeddings</span><span class="stack-item-note">indexado</span></div>
       </div>
     </div>
   </div>
@@ -564,6 +597,7 @@
 
 <footer>
   <p>© 2025 Gustavo Paz — Buenos Aires, Argentina</p>
+  <p style="display:flex;align-items:center;gap:8px;"><img src="cody.png" alt="Cody" title="Cody" style="width:48px;opacity:0.6;transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'"> <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.06em;">— Cody</span></p>
 </footer>
 
 <script>
