@@ -402,21 +402,23 @@
           <div class="project-impact-label">Alcance del sistema</div>
           <p>Siete workflows interconectados que cubren extracción de datos, comunicación operativa, gestión de RRHH y monitoreo de infraestructura — todo corriendo de forma autónoma sobre la misma instancia de n8n y PostgreSQL.</p>
         </div>
-        <div class="project-tags">
-          <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Playwright</span><span class="tag">Superchat</span><span class="tag">Google Sheets API</span>
-        </div>
-      </div>
-      <div>
         <div class="decisions-heading">Workflows implementados</div>
         <ul class="decisions-list">
           <li><strong>Microservicio de extracción propio (Python / Flask / Playwright):</strong> La app web no tenía API. Desarrollé un servicio con tres endpoints — envíos, saldos de clientes y choferes — que hace login, navega y devuelve el Excel. n8n lo consume como cualquier API.</li>
           <li><strong>Reportes semanales de saldos:</strong> Dos workflows programados descargan el reporte de saldos vía el microservicio, hacen backup en Drive y actualizan el Google Sheet mensual activo. Si la descarga falla, reintenta automáticamente a los 3 minutos.</li>
           <li><strong>Archivo mensual desde plantilla:</strong> El primero de cada mes se crean la carpeta y el archivo desde una plantilla de Drive. El ID del archivo activo se almacena en PostgreSQL y es consultado por todos los workflows del período — sin hardcodear referencias.</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="decisions-list">
           <li><strong>Colectas diarias outbound:</strong> Cada día se envía automáticamente una plantilla de mensaje a cada contacto de la lista de colecta registrada en Superchat. El atributo zona del contacto determina desde qué número de WhatsApp se envía el mensaje — Superchat gestiona múltiples líneas conectadas y cada zona tiene asignada una línea específica.</li>
           <li><strong>Colectas diarias inbound:</strong> El sistema captura las respuestas afirmativas a los mensajes de colecta y consulta al contacto la cantidad de paquetes a retirar. El resto de la información necesaria se extrae directamente del perfil del contacto en Superchat, y el registro completo se vuelca en el Excel del mes activo para el procesamiento del equipo operativo.</li>
           <li><strong>Gestión de entrevistas:</strong> Recibe postulaciones por WhatsApp (vía Superchat), extrae los datos del contacto, consulta el sheet de entrevistas para obtener horario y lugar asignado, y registra al postulante con la información consolidada.</li>
           <li><strong>Monitoreo de base de datos con poda adaptativa:</strong> Corre cada 12 horas. Si la DB supera 300 MB aplica retención de 48 hs; si supera 400 MB, 24 hs. Ejecuta CHECKPOINT para liberar el WAL. Operación completamente autónoma. El volumen de mensajes que maneja la empresa hacía que el borrado predeterminado de n8n (7 días) fuera insuficiente para mantener la base en un tamaño manejable, lo que hubiera implicado migrar a un plan de Railway más costoso. La poda adaptativa resolvió esto sin cambiar de plan.</li>
         </ul>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Playwright</span><span class="tag">Superchat</span><span class="tag">Google Sheets API</span>
+        </div>
       </div>
     </div>
 
