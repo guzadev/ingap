@@ -422,19 +422,25 @@
       </div>
     </div>
 
-    <div class="project-card">
-      <div class="project-num">07</div>
-      <div class="project-client">Proyecto propio · Trading</div>
-      <h3 class="project-name">Scalpy — Asistente de Psicología del Trading</h3>
-      <p class="project-problem"><strong>Problema:</strong> Los traders toman decisiones irracionales bajo presión emocional — miedo, avaricia, revenge trading — y no tienen acceso a un asistente que les ayude a procesar esas situaciones en tiempo real con base conceptual sólida.</p>
-      <ul class="decisions-list">
-        <li><strong>RAG sobre dos libros como herramientas separadas:</strong> "Trading en la Zona" (Douglas) y "Pensar Rápido, Pensar Despacio" (Kahneman) están indexados en dos tablas vectoriales distintas en Supabase, expuestas como herramientas independientes con descripciones semánticas específicas. El agente consulta una, la otra, o ambas según el contexto.</li>
-        <li><strong>Gemini para generación, OpenAI para embeddings:</strong> La generación de respuestas usa Gemini 2.5 Flash Lite y el indexado del conocimiento usa embeddings de OpenAI.</li>
-        <li><strong>Soporte multimodal en Telegram:</strong> El bot acepta texto, audio y fotos. Los mensajes de voz se transcriben con Gemini antes de entrar al pipeline.</li>
-        <li><strong>Error handling tipado:</strong> Un nodo clasifica los errores por tipo (rate limit, timeout, Supabase caído, Postgres caído, contexto demasiado largo, API key inválida) y devuelve un mensaje diferente por caso. El usuario nunca ve un error técnico.</li>
-      </ul>
-      <div class="project-tags">
-        <span class="tag">Telegram Bot API</span><span class="tag">Supabase</span><span class="tag">Gemini 2.5 Flash Lite</span><span class="tag">OpenAI Embeddings</span>
+    <div class="project-card wide">
+      <div>
+        <div class="project-num">07</div>
+        <div class="project-client">Proyecto propio · Trading</div>
+        <h3 class="project-name">Scalpy — Asistente de Psicología del Trading</h3>
+        <p class="project-problem"><strong>Problema:</strong> Los traders toman decisiones irracionales bajo presión emocional — miedo, avaricia, revenge trading — y no tienen acceso a un asistente que les ayude a procesar esas situaciones en tiempo real con base conceptual sólida.</p>
+        <ul class="decisions-list">
+          <li><strong>RAG sobre dos libros como herramientas separadas:</strong> "Trading en la Zona" (Douglas) y "Pensar Rápido, Pensar Despacio" (Kahneman) están indexados en dos tablas vectoriales distintas en Supabase, expuestas como herramientas independientes con descripciones semánticas específicas. El agente consulta una, la otra, o ambas según el contexto.</li>
+          <li><strong>Gemini para generación, OpenAI para embeddings:</strong> La generación de respuestas usa Gemini 2.5 Flash Lite y el indexado del conocimiento usa embeddings de OpenAI.</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="decisions-list">
+          <li><strong>Soporte multimodal en Telegram:</strong> El bot acepta texto, audio y fotos. Los mensajes de voz se transcriben con Gemini antes de entrar al pipeline.</li>
+          <li><strong>Error handling tipado:</strong> Un nodo clasifica los errores por tipo (rate limit, timeout, Supabase caído, Postgres caído, contexto demasiado largo, API key inválida) y devuelve un mensaje diferente por caso. El usuario nunca ve un error técnico.</li>
+        </ul>
+        <div class="project-tags">
+          <span class="tag">Telegram Bot API</span><span class="tag">Supabase</span><span class="tag">Gemini 2.5 Flash Lite</span><span class="tag">OpenAI Embeddings</span>
+        </div>
       </div>
     </div>
 
