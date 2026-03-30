@@ -313,7 +313,7 @@
           <p>Prospección outbound automatizada en tres canales con plantillas por etapa → atención de inbound con clasificación por rubro y calificación → creación automática del lead en Odoo con historial pegado → derivación al vendedor con toda la información relevante. <strong>Opera de forma autónoma sin intervención manual en ninguna etapa del primer contacto.</strong></p>
         </div>
         <div class="project-tags">
-          <span class="tag">LinkedIn API</span><span class="tag">Unipile</span><span class="tag">Odoo</span><span class="tag">WhatsApp</span><span class="tag">Gmail API</span><span class="tag">GPT-5-mini</span><span class="tag">PostgreSQL</span>
+          <span class="tag">LinkedIn API</span><span class="tag">Unipile</span><span class="tag">Odoo</span><span class="tag">WhatsApp</span><span class="tag">Gmail</span>
         </div>
       </div>
       <div>
@@ -334,14 +334,14 @@
       <div class="project-client">Cashlink · Empresa financiera</div>
       <h3 class="project-name">Pipeline de Onboarding y Validación Documental</h3>
       <p class="project-problem"><strong>Problema:</strong> El proceso de calificación requería revisión manual de documentos, verificando que DNIs, recibos de sueldo y extractos bancarios fueran coherentes entre sí y con los datos declarados.</p>
+      <p class="project-problem">El bot conduce al usuario a través de un menú estructurado. Según las opciones seleccionadas, el sistema extrae la información necesaria para determinar el perfil del solicitante y lo deriva por la rama de automatización correspondiente. Con los datos recolectados, crea automáticamente una cuenta en el CRM. Una vez completado el flujo de calificación, el bot solicita la documentación requerida según el perfil detectado: identifica cada tipo de documento recibido, extrae la información relevante de cada uno, y cuando el legajo está completo deriva al agente comercial para continuar la gestión.</p>
       <ul class="decisions-list">
         <li><strong>Validación en tres capas:</strong> Validación individual, extracción de datos estructurados, y verificación de consistencia cruzada entre documentos. El rechazo puede ocurrir en cualquier capa.</li>
         <li><strong>Buffer con soporte multimedia:</strong> El buffer almacena URLs de adjuntos separadas del texto y el concatenador los reagrupa — resuelve conversaciones donde el usuario envía varias imágenes en mensajes separados.</li>
-        <li><strong>Gestión de conversaciones con TTL:</strong> Un workflow independiente cierra conversaciones inactivas por más de 2 horas, liberando el estado asociado en la base de datos.</li>
-        <li><strong>Módulos con flags de activación:</strong> La carga de documentación al CRM está desactivada por configuración sin afectar el resto del pipeline.</li>
+        <li><strong>Escalado por inactividad:</strong> Las conversaciones que superan el tiempo límite sin resolución — cuando el lead deja de responder — son derivadas automáticamente a un agente comercial para que retome la gestión de forma manual.</li>
       </ul>
       <div class="project-tags">
-        <span class="tag">WhatsApp</span><span class="tag">Vision IA</span><span class="tag">PostgreSQL</span><span class="tag">HighLevel</span>
+        <span class="tag">WhatsApp</span><span class="tag">Vision IA</span><span class="tag">IPCall</span>
       </div>
     </div>
 
@@ -353,11 +353,10 @@
       <ul class="decisions-list">
         <li><strong>Separación clasificador / respondedor:</strong> El agente clasificador analiza intención sin generar texto para el usuario. El respondedor genera texto sin clasificar. Contexto acotado en cada uno.</li>
         <li><strong>División de respuesta con intervalos:</strong> Un tercer agente fragmenta la respuesta en hasta tres mensajes enviados con pausas calculadas, produciendo una experiencia conversacional natural.</li>
-        <li><strong>Contexto del turno anterior en base de datos:</strong> El último mensaje del agente se almacena en PostgreSQL y se inyecta al clasificador en cada nuevo turno — distingue respuestas a preguntas abiertas de nuevos temas.</li>
-        <li><strong>Estado basado en tags del CRM:</strong> Los estados se leen desde HighLevel. El sistema consulta la fuente de verdad, no infiere desde la conversación.</li>
+        <li><strong>Control de intervención por tags del CRM:</strong> Si el contacto ya es un cliente conocido, el CRM tiene asignado un tag que impide que el bot intervenga. El resto de los tags son colocados por el propio bot durante la conversación para habilitar el seguimiento manual posterior por parte del equipo.</li>
       </ul>
       <div class="project-tags">
-        <span class="tag">GPT-5-mini</span><span class="tag">WhatsApp</span><span class="tag">HighLevel</span><span class="tag">Multi-agente</span><span class="tag">PostgreSQL</span>
+        <span class="tag">WhatsApp</span><span class="tag">HighLevel</span>
       </div>
     </div>
 
@@ -365,15 +364,14 @@
       <div class="project-num">04</div>
       <div class="project-client">Marketplace · Compra-venta de usados</div>
       <h3 class="project-name">Bot Cotizador con Precios de Mercado en Tiempo Real</h3>
-      <p class="project-problem"><strong>Problema:</strong> La cotización de productos usados era manual e inconsistente — los valores dependían del vendedor de turno y de si alguien había consultado precios ese día.</p>
+      <p class="project-problem"><strong>Problema:</strong> El proceso de cotización de productos usados era completamente manual: un vendedor revisaba precios de mercado, aplicaba las reglas del negocio y respondía cada consulta de forma individual. El cliente necesitaba automatizar ese proceso para dar respuesta inmediata sin depender de disponibilidad humana.</p>
       <ul class="decisions-list">
         <li><strong>Consulta de mercado antes de cotizar:</strong> El sistema formula una búsqueda, recupera precios vigentes, y aplica las reglas de negocio sobre ese dato. Sin lista de precios hardcodeada.</li>
         <li><strong>Pipeline de cuatro etapas:</strong> Formulación de consulta → búsqueda web → cotización con reglas → respuesta. Cada etapa es un agente independiente con responsabilidad acotada.</li>
         <li><strong>Estado de cotización como tag en CRM:</strong> Si el contacto ya tiene el tag cotizacion_hecha, el sistema no reprocesa. El CRM es la fuente de verdad del estado.</li>
-        <li><strong>Debounce con PostgreSQL:</strong> Buffer de mensajes y tabla de proceso activo como mecanismo de exclusión mutua para prevenir race conditions.</li>
       </ul>
       <div class="project-tags">
-        <span class="tag">WhatsApp</span><span class="tag">Web Search</span><span class="tag">HighLevel</span><span class="tag">PostgreSQL</span>
+        <span class="tag">WhatsApp</span><span class="tag">Web Search</span><span class="tag">HighLevel</span>
       </div>
     </div>
 
@@ -384,11 +382,14 @@
       <p class="project-problem"><strong>Problema:</strong> Leads entraban simultáneamente por WhatsApp, Instagram, Facebook y Gmail. La calificación, respuesta y actualización del CRM se hacían manualmente, con criterios inconsistentes.</p>
       <ul class="decisions-list">
         <li><strong>Agentes especializados por función:</strong> Clasificación, calificación, identificación de proveedor, extracción de datos y gestión de consultas son agentes distintos con contexto mínimo y output predecible.</li>
-        <li><strong>Salida tipada con JSON Schema:</strong> Los agentes de clasificación retornan estructuras validadas con tipos y enumeraciones definidas. Sin procesamiento de texto libre en los nodos downstream.</li>
         <li><strong>Arquitectura canal-agnóstica:</strong> El mismo núcleo procesa mensajes de cuatro canales distintos. Los adaptadores son capas delgadas de normalización sobre el canal de entrada.</li>
+        <li><strong>Clasificación del tipo de contacto:</strong> El sistema identifica si el mensaje proviene de un cliente, proveedor, consulta general o postulante, y adapta el flujo de respuesta según esa categoría.</li>
+        <li><strong>Recolección de datos según perfil:</strong> Una vez identificado el tipo de contacto, el sistema solicita la información específica requerida para ese caso y construye un resumen estructurado para el agente comercial al momento de la derivación.</li>
+        <li><strong>Respuesta autónoma a consultas frecuentes:</strong> El bot gestiona preguntas habituales de forma autónoma, sin intervención humana, derivando únicamente cuando el caso lo requiere.</li>
+        <li><strong>Etiquetado automático en Gmail:</strong> Los correos entrantes son clasificados y etiquetados según el tipo de contacto detectado, dejando la bandeja organizada para el equipo comercial sin intervención manual.</li>
       </ul>
       <div class="project-tags">
-        <span class="tag">WhatsApp</span><span class="tag">Instagram</span><span class="tag">Gmail</span><span class="tag">HighLevel</span><span class="tag">Multi-agente</span>
+        <span class="tag">WhatsApp</span><span class="tag">Instagram</span><span class="tag">Gmail</span><span class="tag">HighLevel</span>
       </div>
     </div>
 
@@ -403,7 +404,7 @@
           <p>Siete workflows interconectados que cubren extracción de datos, comunicación operativa, gestión de RRHH y monitoreo de infraestructura — todo corriendo de forma autónoma sobre la misma instancia de n8n y PostgreSQL.</p>
         </div>
         <div class="project-tags">
-          <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Playwright</span><span class="tag">Superchat</span><span class="tag">Google Sheets API</span><span class="tag">PostgreSQL</span><span class="tag">n8n</span>
+          <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Playwright</span><span class="tag">Superchat</span><span class="tag">Google Sheets API</span>
         </div>
       </div>
       <div>
@@ -412,10 +413,10 @@
           <li><strong>Microservicio de extracción propio (Python / Flask / Playwright):</strong> La app web no tenía API. Desarrollé un servicio con tres endpoints — envíos, saldos de clientes y choferes — que hace login, navega y devuelve el Excel. n8n lo consume como cualquier API.</li>
           <li><strong>Reportes semanales de saldos:</strong> Dos workflows programados descargan el reporte de saldos vía el microservicio, hacen backup en Drive y actualizan el Google Sheet mensual activo. Si la descarga falla, reintenta automáticamente a los 3 minutos.</li>
           <li><strong>Archivo mensual desde plantilla:</strong> El primero de cada mes se crean la carpeta y el archivo desde una plantilla de Drive. El ID del archivo activo se almacena en PostgreSQL y es consultado por todos los workflows del período — sin hardcodear referencias.</li>
-          <li><strong>Colectas diarias outbound:</strong> Envío automatizado de mensajes de colecta a choferes vía Superchat/WhatsApp, con texto personalizado por destinatario.</li>
-          <li><strong>Colectas diarias inbound:</strong> Captura las respuestas afirmativas, identifica al chofer por la conversación y registra la confirmación en el sheet del mes activo.</li>
+          <li><strong>Colectas diarias outbound:</strong> Cada día se envía automáticamente una plantilla de mensaje a cada contacto de la lista de colecta registrada en Superchat. El atributo zona del contacto determina desde qué número de WhatsApp se envía el mensaje — Superchat gestiona múltiples líneas conectadas y cada zona tiene asignada una línea específica.</li>
+          <li><strong>Colectas diarias inbound:</strong> El sistema captura las respuestas afirmativas a los mensajes de colecta y consulta al contacto la cantidad de paquetes a retirar. El resto de la información necesaria se extrae directamente del perfil del contacto en Superchat, y el registro completo se vuelca en el Excel del mes activo para el procesamiento del equipo operativo.</li>
           <li><strong>Gestión de entrevistas:</strong> Recibe postulaciones por WhatsApp (vía Superchat), extrae los datos del contacto, consulta el sheet de entrevistas para obtener horario y lugar asignado, y registra al postulante con la información consolidada.</li>
-          <li><strong>Monitoreo de base de datos con poda adaptativa:</strong> Corre cada 12 horas. Si la DB supera 300 MB aplica retención de 48 hs; si supera 400 MB, 24 hs. Ejecuta CHECKPOINT para liberar el WAL. Operación completamente autónoma.</li>
+          <li><strong>Monitoreo de base de datos con poda adaptativa:</strong> Corre cada 12 horas. Si la DB supera 300 MB aplica retención de 48 hs; si supera 400 MB, 24 hs. Ejecuta CHECKPOINT para liberar el WAL. Operación completamente autónoma. El volumen de mensajes que maneja la empresa hacía que el borrado predeterminado de n8n (7 días) fuera insuficiente para mantener la base en un tamaño manejable, lo que hubiera implicado migrar a un plan de Railway más costoso. La poda adaptativa resolvió esto sin cambiar de plan.</li>
         </ul>
       </div>
     </div>
@@ -427,13 +428,12 @@
       <p class="project-problem"><strong>Problema:</strong> Los traders toman decisiones irracionales bajo presión emocional — miedo, avaricia, revenge trading — y no tienen acceso a un asistente que les ayude a procesar esas situaciones en tiempo real con base conceptual sólida.</p>
       <ul class="decisions-list">
         <li><strong>RAG sobre dos libros como herramientas separadas:</strong> "Trading en la Zona" (Douglas) y "Pensar Rápido, Pensar Despacio" (Kahneman) están indexados en dos tablas vectoriales distintas en Supabase, expuestas como herramientas independientes con descripciones semánticas específicas. El agente consulta una, la otra, o ambas según el contexto.</li>
-        <li><strong>Gemini para generación, OpenAI para embeddings:</strong> La generación usa Gemini 2.5 Flash Lite. Los embeddings usan OpenAI. Embeddings de OpenAI son más consistentes para RAG; Gemini es más económico para generación a escala.</li>
-        <li><strong>Soporte multimodal en Telegram:</strong> El bot acepta texto, audio y fotos. Los mensajes de voz se transcriben con Gemini antes de entrar al pipeline. Formatos no soportados devuelven un mensaje específico en lugar de un error genérico.</li>
+        <li><strong>Gemini para generación, OpenAI para embeddings:</strong> La generación de respuestas usa Gemini 2.5 Flash Lite y el indexado del conocimiento usa embeddings de OpenAI.</li>
+        <li><strong>Soporte multimodal en Telegram:</strong> El bot acepta texto, audio y fotos. Los mensajes de voz se transcriben con Gemini antes de entrar al pipeline.</li>
         <li><strong>Error handling tipado:</strong> Un nodo clasifica los errores por tipo (rate limit, timeout, Supabase caído, Postgres caído, contexto demasiado largo, API key inválida) y devuelve un mensaje diferente por caso. El usuario nunca ve un error técnico.</li>
-        <li><strong>Sistema de suscripciones con LemonSqueezy:</strong> Tabla suscripciones en PostgreSQL con telegram_id, estado, plan, fecha de vencimiento y lemon_subscription_id. El acceso al bot está condicionado al estado de la suscripción.</li>
       </ul>
       <div class="project-tags">
-        <span class="tag">Telegram Bot API</span><span class="tag">Supabase</span><span class="tag">Gemini 2.5 Flash Lite</span><span class="tag">OpenAI Embeddings</span><span class="tag">PostgreSQL</span><span class="tag">n8n</span>
+        <span class="tag">Telegram Bot API</span><span class="tag">Supabase</span><span class="tag">Gemini 2.5 Flash Lite</span><span class="tag">OpenAI Embeddings</span>
       </div>
     </div>
 
@@ -450,7 +450,7 @@
       <div class="pattern-num">01</div>
       <div class="pattern-name">Buffer + Mutex con PostgreSQL</div>
       <p class="pattern-desc">Mecanismo de debounce para canales de mensajería: los mensajes se acumulan en un buffer durante una ventana de tiempo. Una tabla de proceso activo funciona como lock para prevenir procesamiento concurrente cuando un usuario envía múltiples mensajes en ráfaga.</p>
-      <div class="pattern-used">Aplicado en 4 de 6 sistemas</div>
+      <div class="pattern-used">Aplicado en todos los sistemas conversacionales</div>
     </div>
     <div class="pattern-card">
       <div class="pattern-num">02</div>
@@ -473,7 +473,7 @@
     <div class="pattern-card">
       <div class="pattern-num">05</div>
       <div class="pattern-name">Microservicio de extracción desacoplado</div>
-      <p class="pattern-desc">Cuando una fuente de datos no tiene API, el scraper vive como un servicio independiente que expone endpoints REST. n8n lo consume sin conocer los detalles de la extracción ni depender de su implementación interna.</p>
+      <p class="pattern-desc">Cuando una fuente de datos no expone una API, se construye un microservicio independiente que actúa como capa de extracción y expone sus propios endpoints REST. n8n lo consume de la misma forma que cualquier integración externa, sin conocer los detalles de la implementación interna ni acoplarse a ella.</p>
       <div class="pattern-used">Aplicado en DarLogística</div>
     </div>
     <div class="pattern-card">
